@@ -5,7 +5,7 @@
   </a>
 </p>
 <h1 align="center">
-  Sit straigt
+  Sit straight
 </h1>
 
 

@@ -16,9 +16,7 @@ export default () => {
 
     //const cameraRef = useRef(null);
 
-    window.onload = function() {
 
-    }
 
     useEffect(() => {
 
@@ -56,16 +54,9 @@ export default () => {
                 context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
                 context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
               });
-            });
-      
-    //         // var gui = new dat.GUI();
-    //         // gui.add(tracker, 'edgesDensity', 0.1, 0.5).step(0.01);
-    //         // gui.add(tracker, 'initialScale', 1.0, 10.0).step(0.1);
-    //         // gui.add(tracker, 'stepSize', 1, 5).step(0.1);
-          
+            });  
+   
     }
-
-
 
     return (<>
     <Helmet>    
