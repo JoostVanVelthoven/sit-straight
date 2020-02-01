@@ -7,19 +7,25 @@
 body{
     background-color:  #ddd;
 }
+
+
+
 header{
     background-color: #193F80;
     color: #80AEFF;
     font-size: 1.1;
     text-align: center;
     padding: 1rem;
-    position: fixed;
     width: 100%;
     box-shadow: 0 3px 10px 0 rgba(0,0,0,.12);
 
 }
-
-video {
-    width: 200px;
-    height: 200px;
+.container {
+    width: 320px;
+    margin: auto;
 }
+
+video, canvas {
+    position: absolute;
+    
+  }

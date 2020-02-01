@@ -1,65 +1,88 @@
 import React, { useEffect, useRef } from "react"
-import * as faceapi from 'face-api.js';
 import './index.css';
+import {Helmet} from "react-helmet";
+
+
+//import 'tracking/build/tracking';
+// //node_modules/tracking/build/data/face.js
+ //import 'tracking/build/data/face';
+// require('../../build/tracking');
+// //node_modules/tracking/build/data/face.js
+// require('../../build/tracking/data/face');
+
+
 
 export default () => {
 
-    const cameraRef = useRef(null);
+    //const cameraRef = useRef(null);
 
-    async function loadCamera() {
-        await Promise.all([
-            faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
-            faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
-            faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-            faceapi.nets.faceExpressionNet.loadFromUri('/models')
-          ]);
-
-        cameraRef.current.addEventListener('play', () => {
-
-            const video = cameraRef.current;
-
-            const canvas = faceapi.createCanvasFromMedia(cameraRef.current)
-            document.body.append(canvas)
-            const displaySize = { width: video.width, height: video.height }
-            faceapi.matchDimensions(canvas, displaySize);
-
-
-            console.log(displaySize)
-
-            setInterval(async () => {
-              const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
-              console.log(detections);
-              const resizedDetections = faceapi.resizeResults(detections, displaySize)
-              canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
-              faceapi.draw.drawDetections(canvas, resizedDetections)
-              faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
-              faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
-            }, 100)
-        });
-
-        navigator.mediaDevices.getUserMedia({
-            video: true,
-            audio: false
-        }
-        ).then((stream) => {
-
-            cameraRef.current.srcObject = stream;
-        })
+    window.onload = function() {
 
     }
 
     useEffect(() => {
-        loadCamera();      
+
+        
+        window.setTimeout(setCamera,5000);
+
     });
 
+    function setCamera() {
+    
+            var video = document.getElementById('video');
+
+            
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+      
+            var tracker = new window.tracking.ObjectTracker('face');
+            console.log(tracker);
+            tracker.setInitialScale(4);
+            tracker.setStepSize(2);
+            tracker.setEdgesDensity(0.1);
+      
+            window.tracking.track('#video', tracker, { camera: true });
+      
+            tracker.on('track', function(event) {
+
+                console.log(event);
+              context.clearRect(0, 0, canvas.width, canvas.height);
+      
+              event.data.forEach(function(rect) {
+                context.strokeStyle = '#a64ceb';
+                context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+                context.font = '11px Helvetica';
+                context.fillStyle = "#fff";
+                context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+                context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+              });
+            });
+      
+    //         // var gui = new dat.GUI();
+    //         // gui.add(tracker, 'edgesDensity', 0.1, 0.5).step(0.01);
+    //         // gui.add(tracker, 'initialScale', 1.0, 10.0).step(0.1);
+    //         // gui.add(tracker, 'stepSize', 1, 5).step(0.1);
+          
+    }
 
 
 
     return (<>
+    <Helmet>    
+  <script src="/build/tracking.js"></script>
+  <script src="/build/data/face.js"></script>
+
+</Helmet>
         <header>
-            Sit straigt coach - sit straigt and move the slider  😁
+            Sit straigt coach - sit straigt and move the slider  <span role="img">😁</span>
     </header>
         <main>
-            <video id="video" ref={cameraRef} width="320" height="240" preload="preload" autoPlay="autoPlay" loop="loop" muted="muted"></video>
-            <canvas id="canvas" width="320" height="240"></canvas></main></>);
+      
+    <div className="container">
+      <video id="video" width="320" height="240" preload="preload" autoPlay loop muted></video>
+      <canvas id="canvas" width="320" height="240"></canvas>
+    </div>
+
+            
+            </main></>);
 }
