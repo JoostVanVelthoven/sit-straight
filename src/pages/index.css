@@ -8,8 +8,6 @@ body{
     background-color:  #ddd;
 }
 
-
-
 header{
     background-color: #193F80;
     color: #80AEFF;
@@ -23,9 +21,17 @@ header{
 .container {
     width: 320px;
     margin: auto;
+    background-color: #999999;
 }
 
 video, canvas {
     position: absolute;
-    
-  }
+}
+
+.slider{
+    height: 222px;
+    margin: 5px 0 5px 10px;
+}
+
+.stats{
+}
