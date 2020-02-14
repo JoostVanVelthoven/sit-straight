@@ -89,6 +89,11 @@ export default () => {
 
   }
 
+  useEffect(() =>  {
+    document.title = ( isSettingStraight ? '😎' : '😪') + ' - sit straight using camera coaching';
+
+  }, [isSettingStraight])
+
   return (<>
     <Helmet>
       <script src="/build/tracking.js"></script>
@@ -96,7 +101,7 @@ export default () => {
 
     </Helmet>
     <header>
-      Sit straigt coach - sit straigt and move the slider  <span role="img">{isSettingStraight}{isSettingStraight ? '😎' : '😪'}</span>
+      Sit straigt coach - sit straigt and move the slider  <span role="img">{isSettingStraight ? '😎' : '😪'}</span>
     </header>
     <main className="container">
       <div> <video ref={cameraRef} id="video" width="320" height="240" preload="preload" autoPlay loop muted></video>
