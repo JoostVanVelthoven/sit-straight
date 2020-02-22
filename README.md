@@ -14,7 +14,7 @@
 
 1.  **Create a Gatsby site.**
 
-PWA that teach you with video analyse how to sit straight. I am doing this project to improve a) back posture and b) improve my react hooks skills. 
+PWA that teach you with video analyse how to sit straight. I am doing this project to improve a) back posture and b) improve my react hooks skills. Unfortunately, non active windows can not process camera views. 
   
 
 1.  **Start developing.**
