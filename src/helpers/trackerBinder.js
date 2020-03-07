@@ -2,7 +2,9 @@ export default (cameraRef, setHeadPosition) => {
 
     const frameAnalysed = event => {
         event.data.forEach(function (rect) {
+            console.log('AAA');
             setHeadPosition(rect);
+
         });
 
     };
