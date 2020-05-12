@@ -1,9 +1,14 @@
-import React from "react"
+import React , { useCallback } from "react"
 
 import Slider from 'react-input-slider';
 
 export default (props ) =>  {
-
+    const usePip = useCallback(
+        () => {
+            props.cameraRef.current.requestPictureInPicture()
+        },
+        [props.cameraRef.current],
+      );
     return (<main className="container">
         <div> 
             <video ref={props.cameraRef} id="video" width="320" height="240" preload="preload" autoPlay loop muted></video>
@@ -12,6 +17,8 @@ export default (props ) =>  {
         </div>
         <div className="stats">
             &nbsp;
+            <a onClick={usePip}>Use pip</a>
+
         </div>
     </main>);
     }
