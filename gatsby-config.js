@@ -8,8 +8,8 @@ module.exports = {
   plugins: [`gatsby-plugin-offline`, {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `GatsbyJS`,
-        short_name: `GatsbyJS`,
+        name: `Sit straight`,
+        short_name: `Sit straight`,
         start_url: `/`,
         background_color: `#f7f0eb`,
         theme_color: `#a2466c`,
