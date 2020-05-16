@@ -6,6 +6,7 @@
 
 body{
     background-color:  #ddd;
+    font-size: 130%;
 }
 
 header{
@@ -15,21 +16,41 @@ header{
     text-align: center;
     padding: 1rem;
     width: 100%;
-    box-shadow: 0 3px 10px 0 rgba(0,0,0,.12);
+    height: 5;
+    
 
 }
 .container {
     width: 320px;
     margin: auto;
-    background-color: #999999;
+    background-color: #e8e8e8;
 }
 
 video, canvas {
     position: absolute;
 }
-
+main{
+    padding: 4rem;
+}
 main .slider{
     height: 222px;
     margin: 10px 0 5px 10px;
 }
+
+.stats > div {
+    padding: 1.2rem 0 1.2rem 0;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+    border-bottom: 1px dotted #000;
+}
+
+.stats .bulb {
+    background-color: #ddd;
+    border-radius: 1rem;
+    padding: 2px;
+    width: 30px;
+    display: inline-block;
+    text-align: center;
+}
+
 

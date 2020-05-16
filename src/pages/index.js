@@ -15,7 +15,7 @@ export default () => {
   const [loaded, setLoaded] = useState(false);
   const [headPosition, setHeadPosition] = useState();
   const [isSettingStraight, setIsSettingStraight] = useState(true);
-
+  const [setupState, setSetupState ] = useState({ hasCamera : false });
 
   //unfortuntly the webcam current library is not node/npm.
   useEffect(() => { window.setTimeout(() => setLoaded(true), 1000);  }, []);
@@ -31,10 +31,11 @@ export default () => {
   // new head event
 
   useEffect(() => {
-
     if (!headPosition) {
       return;
     }
+    setSetupState({ ...setupState , hasCamera : true} )
+
     const treshold = sliderState.y * 2.3; // because height is 240
 
     const currentEyeHeight = headPosition.y + (headPosition.height / 2);
@@ -43,7 +44,7 @@ export default () => {
     setIsSettingStraight(isStraight);
     canvasCameraDrawer(canvasRef.current, headPosition, treshold, isStraight, currentEyeHeight);
 
-  }, [headPosition]);
+  }, [headPosition , sliderState]);
 
   useEffect(() => {
     document.title = (isSettingStraight ? '😎' : '😪') + ' - fix your back positure using camera coaching';
@@ -59,5 +60,12 @@ export default () => {
     <header>
       Sit straigt coach - sit straigt and move the slider  <span role="img">{isSettingStraight ? '😎' : '😪'}</span>
     </header>
-    <Main cameraRef={cameraRef} canvasRef={canvasRef} sliderState={sliderState} setSliderState={setSliderState} /></>);
+    <Main 
+      cameraRef={cameraRef} 
+      canvasRef={canvasRef} 
+      sliderState={sliderState} 
+      setSliderState={setSliderState} 
+      setupState={setupState}
+      setSetupState={setSetupState}
+      /></>);
 }
