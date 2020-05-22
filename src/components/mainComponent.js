@@ -4,7 +4,6 @@ import Slider from 'react-input-slider';
 
 export default ({sliderState ,  setSliderState , cameraRef , canvasRef, setupState ,  setSetupState } ) =>  {
     
-    console.log(setupState);
     const usePip = useCallback(
         () => {
             const requestPip = cameraRef.current.requestPictureInPicture;
@@ -13,16 +12,16 @@ export default ({sliderState ,  setSliderState , cameraRef , canvasRef, setupSta
                 requestPip();
             }
         },
-        [cameraRef.current],
+        [cameraRef.current, cameraRef, cameraRef.current, setupState, setSetupState],
       );
 
     const chanedSliderState = useCallback(
         
         ({ y }) => {
-            setSetupState({ ...setupState , isSliderUsed : true} );
+            setSetupState({ isSliderUsed : true , ...setupState } );
             setSliderState(sliderState => ({ ...sliderState, y }));
         } ,
-        []
+        [ setupState , setSetupState , setSliderState ]
       );
       //   
 
@@ -36,7 +35,8 @@ export default ({sliderState ,  setSliderState , cameraRef , canvasRef, setupSta
         <div className="stats">
             <div><span className="bulb" >{setupState.hasCamera ? '✓' : 1}</span> Allow camera access</div>
             <div><span className="bulb">{setupState.isSliderUsed ? '✓' : 2}</span> Adjust slider</div>
-            <div onClick={usePip}><span className="bulb">{setupState.hasPip ? '✓' : 3}</span> PIP for non active browser checking</div>
+            {cameraRef.current && cameraRef.current.requestPictureInPicture && 
+                <div onClick={usePip} role="link"><span className="bulb">{setupState.hasPip ? '✓' : 3}</span> PIP for non active browser checking</div>}
         </div>
         
 
