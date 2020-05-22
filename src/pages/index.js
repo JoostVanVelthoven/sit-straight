@@ -44,7 +44,7 @@ export default () => {
     setIsSettingStraight(isStraight);
     canvasCameraDrawer(canvasRef.current, headPosition, treshold, isStraight, currentEyeHeight);
 
-  }, [headPosition , sliderState, setupState]);
+  }, [headPosition , sliderState]);
 
   useEffect(() => {
     document.title = (isSettingStraight ? '😎' : '😪') + ' - fix your back positure using camera coaching';
