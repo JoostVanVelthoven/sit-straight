@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import canvasCameraDrawer from '../helpers/canvasCameraDrawer'
 import trackerBinder from '../helpers/trackerBinder'
 import Main from '../components/mainComponent'
+import fetchInject from 'fetch-inject'
 
 export default () => {
 
@@ -18,7 +19,13 @@ export default () => {
   const [setupState, setSetupState ] = useState({ hasCamera : false });
 
   //unfortuntly the webcam current library is not node/npm.
-  useEffect(() => { window.setTimeout(() => setLoaded(true), 1000);  }, []);
+  useEffect(() => { 
+
+    fetchInject([
+      '/build/tracking.js',
+      '/build/data/face.js'
+    ]).then(_ => setLoaded(true) )
+  }, []);
 
   useEffect(() => {
     if (loaded) {
@@ -52,11 +59,7 @@ export default () => {
   }, [isSettingStraight])
 
    return (<>
-    <Helmet>
-      <script src="/build/tracking.js"></script>
-      <script src="/build/data/face.js"></script>
 
-    </Helmet>
     <header>
       Sit straigt coach - sit straigt and move the slider  <span role="img">{isSettingStraight ? '😎' : '😪'}</span>
     </header>
