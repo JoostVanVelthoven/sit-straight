@@ -27,8 +27,8 @@ export default ({sliderState ,  setSliderState , cameraRef , canvasRef, setupSta
         [ setupState , setSetupState , setSliderState ]
       );
     
-    //const timeCorrect = useObservable(() => timeCorrect$);
-    //const percentageCorrect = useObservable(() => percentageCorrect$);
+    const timeCorrect = useObservable(() => timeCorrect$);
+    const percentageCorrect = useObservable(() => percentageCorrect$);
 
 
     return (<main className="container">
@@ -44,10 +44,10 @@ export default ({sliderState ,  setSliderState , cameraRef , canvasRef, setupSta
             {cameraRef.current && cameraRef.current.requestPictureInPicture && 
                 <div onClick={usePip} role="link"><span className="bulb">{setupState.hasPip ? '✓' : 3}</span> PIP for non active browser checking</div>}
         </div>
-        {/* <div className="stats">
+        <div className="stats">
             <div>{timeCorrect}</div>
             <div>{percentageCorrect}</div>
-        </div>      */}
+        </div>      
         
 
     </main>);

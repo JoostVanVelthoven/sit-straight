@@ -7,7 +7,7 @@ import trackerBinder from '../helpers/trackerBinder'
 import Main from '../components/mainComponent'
 import Footer from '../components/footerComponent'
 import fetchInject from 'fetch-inject'
-import { startTime } from '../helpers/timer'
+import { isCorrectPosition$ } from '../helpers/timer'
 export default () => {
 
   const cameraRef = useRef(null);
@@ -16,7 +16,7 @@ export default () => {
   const [sliderState, setSliderState] = useState({ y: 50 });
   const [loaded, setLoaded] = useState(false);
   const [headPosition, setHeadPosition] = useState();
-  const [isSettingStraight, setIsSettingStraight] = useState(true);
+  const [isSettingStraight, setIsSettingStraight] = useState(undefined);
   const [setupState, setSetupState ] = useState({ hasCamera : false });
 
   //unfortuntly the webcam current library is not node/npm.
@@ -55,8 +55,10 @@ export default () => {
   }, [headPosition , sliderState]);
 
   useEffect(() => {
-    //startTime.next(isSettingStraight);
-    document.title = (isSettingStraight ? '😎' : '😪') + ' - fix your back positure using camera coaching';
+    isCorrectPosition$.next(isSettingStraight);
+    if(isSettingStraight !== undefined){
+      document.title = (isSettingStraight ? '😎' : '😪') + ' - fix your back positure using camera coaching';
+    }
 
   }, [isSettingStraight])
 
