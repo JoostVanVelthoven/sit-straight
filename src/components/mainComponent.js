@@ -1,7 +1,6 @@
 import React , { useCallback } from "react"
 
 import Slider from 'react-input-slider';
-import { BehaviorSubject } from "rxjs";
 import { useObservable } from "rxjs-hooks";
 import { percentageCorrect$ , timeCorrect$ } from '../helpers/timer';
 
@@ -42,7 +41,7 @@ export default ({sliderState ,  setSliderState , cameraRef , canvasRef, setupSta
             <div><span className="bulb" >{setupState.hasCamera ? '✓' : 1}</span> Allow camera access</div>
             <div><span className="bulb">{setupState.isSliderUsed ? '✓' : 2}</span> Adjust slider</div>
             {cameraRef.current && cameraRef.current.requestPictureInPicture && 
-                <div onClick={usePip} role="link"><span className="bulb">{setupState.hasPip ? '✓' : 3}</span> PIP for non active browser checking</div>}
+                <div onClick={usePip} onKeyDown={usePip} role="link"><span className="bulb">{setupState.hasPip ? '✓' : 3}</span> PIP for non active browser checking</div>}
         </div>
         <div className="stats">
             <div>{timeCorrect}</div>

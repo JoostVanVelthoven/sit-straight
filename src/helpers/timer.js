@@ -1,5 +1,5 @@
 import { interval, BehaviorSubject  }  from "rxjs";
-import { scan , map, filter , withLatestFrom, tap, startWith , throttleTime} from 'rxjs/operators';
+import { scan , map, filter , withLatestFrom, startWith , throttleTime} from 'rxjs/operators';
 
 const secondsToHuman = (s) => (s-(s%=60))/60+(9<s?':':':0')+s;
 

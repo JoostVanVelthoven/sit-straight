@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
 import './index.css';
-import { Helmet } from "react-helmet";
 
 import canvasCameraDrawer from '../helpers/canvasCameraDrawer'
 import trackerBinder from '../helpers/trackerBinder'
