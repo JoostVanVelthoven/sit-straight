@@ -16,15 +16,15 @@ export default () => {
   const [loaded, setLoaded] = useState(false);
   const [headPosition, setHeadPosition] = useState();
   const [isSettingStraight, setIsSettingStraight] = useState(undefined);
-  const [setupState, setSetupState ] = useState({ hasCamera : false });
+  const [setupState, setSetupState] = useState({ hasCamera: false });
 
   //unfortuntly the webcam current library is not node/npm.
-  useEffect(() => { 
+  useEffect(() => {
 
     fetchInject([
       '/build/tracking.js',
       '/build/data/face.js'
-    ]).then(_ => setLoaded(true) )
+    ]).then(_ => setLoaded(true))
   }, []);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default () => {
     if (!headPosition) {
       return;
     }
-    setSetupState({ ...setupState , hasCamera : true} )
+    setSetupState({ ...setupState, hasCamera: true })
 
     const treshold = sliderState.y * 2.3; // because height is 240
 
@@ -51,29 +51,29 @@ export default () => {
     setIsSettingStraight(isStraight);
     canvasCameraDrawer(canvasRef.current, headPosition, treshold, isStraight, currentEyeHeight);
 
-  }, [headPosition , sliderState]);
+  }, [headPosition, sliderState]);
 
   useEffect(() => {
     isCorrectPosition$.next(isSettingStraight);
-    if(isSettingStraight !== undefined){
+    if (isSettingStraight !== undefined) {
       document.title = (isSettingStraight ? '😎' : '😪') + ' - fix your back positure using camera coaching';
     }
 
   }, [isSettingStraight])
 
-   return (<>
+  return (<>
 
     <header>
       Sit straigt coach - sit straigt and move the slider  <span role="img">{isSettingStraight ? '😎' : '😪'}</span>
     </header>
-    <Main 
-      cameraRef={cameraRef} 
-      canvasRef={canvasRef} 
-      sliderState={sliderState} 
-      setSliderState={setSliderState} 
+    <Main
+      cameraRef={cameraRef}
+      canvasRef={canvasRef}
+      sliderState={sliderState}
+      setSliderState={setSliderState}
       setupState={setupState}
       setSetupState={setSetupState}
-      />
-      <Footer />
-      </>);
+    />
+    <Footer />
+  </>);
 }
