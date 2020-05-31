@@ -5,8 +5,9 @@ import { Helmet } from "react-helmet";
 import canvasCameraDrawer from '../helpers/canvasCameraDrawer'
 import trackerBinder from '../helpers/trackerBinder'
 import Main from '../components/mainComponent'
+import Footer from '../components/footerComponent'
 import fetchInject from 'fetch-inject'
-
+import { startTime } from '../helpers/timer'
 export default () => {
 
   const cameraRef = useRef(null);
@@ -54,6 +55,7 @@ export default () => {
   }, [headPosition , sliderState]);
 
   useEffect(() => {
+    //startTime.next(isSettingStraight);
     document.title = (isSettingStraight ? '😎' : '😪') + ' - fix your back positure using camera coaching';
 
   }, [isSettingStraight])
@@ -70,5 +72,7 @@ export default () => {
       setSliderState={setSliderState} 
       setupState={setupState}
       setSetupState={setSetupState}
-      /></>);
+      />
+      <Footer />
+      </>);
 }
