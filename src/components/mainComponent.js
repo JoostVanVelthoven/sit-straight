@@ -11,7 +11,7 @@ export default ({ sliderState, setSliderState, cameraRef, canvasRef, setupState,
             const requestPip = cameraRef.current.requestPictureInPicture;
             if (requestPip) {
                 setSetupState({ ...setupState, hasPip: true });
-                requestPip();
+                cameraRef.current.requestPictureInPicture();
             }
         },
         [cameraRef.current, cameraRef, cameraRef.current, setupState, setSetupState],
@@ -41,7 +41,7 @@ export default ({ sliderState, setSliderState, cameraRef, canvasRef, setupState,
             <div><span className="bulb" >{setupState.hasCamera ? '✓' : 1}</span> Allow camera access</div>
             <div><span className="bulb">{setupState.isSliderUsed ? '✓' : 2}</span> Adjust slider</div>
             {cameraRef.current && cameraRef.current.requestPictureInPicture &&
-                <div onClick={usePip} onKeyDown={usePip} role="link"><span className="bulb">{setupState.hasPip ? '✓' : 3}</span> PIP for non active browser checking</div>}
+                <div onClick={usePip} onKeyDown={usePip} role="link" className="click"><span className="bulb">{setupState.hasPip ? '✓' : 3}</span> PIP for non active browser checking</div>}
         </div>
         <div className="stats">
             <div>{timeCorrect}</div>

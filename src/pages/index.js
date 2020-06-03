@@ -20,12 +20,12 @@ export default () => {
 
   //unfortuntly the webcam current library is not node/npm.
   useEffect(() => {
-
-    fetchInject([
-      '/build/tracking.js',
-      '/build/data/face.js'
-    ]).then(_ => setLoaded(true))
-  }, []);
+      fetchInject([
+        '/build/tracking.js',
+      ]).then(_ => fetchInject([
+        '/build/data/face.js'
+      ]).then(_ => setLoaded(true)));
+    }, []);
 
   useEffect(() => {
     if (loaded) {

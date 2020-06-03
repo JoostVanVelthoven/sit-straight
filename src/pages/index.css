@@ -38,7 +38,8 @@ main .slider{
     padding: 1.2rem 0 1.2rem 0;
     margin-top: 0.4rem;
     margin-bottom: 0.4rem;
-    border-bottom: 1px dotted #000;
+    border-bottom: 1px dotted #999999;
+    color: #4a4a4a;
 }
 
 .setup .bulb {
@@ -48,6 +49,7 @@ main .slider{
     width: 30px;
     display: inline-block;
     text-align: center;
+    
 }
 
 .stats > div{
@@ -78,5 +80,14 @@ footer a:hover{
     color: #000;
     font-size: 90%;
     letter-spacing: 0.2rem;
+    text-decoration: underline;
+}
+
+.click {
+    cursor: pointer;
+    transform: 0.3s;
+}
+
+.click:hover{
     text-decoration: underline;
 }
