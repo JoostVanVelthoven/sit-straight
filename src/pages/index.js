@@ -64,7 +64,7 @@ export default () => {
   return (<>
 
     <header>
-      Sit straigt coach - sit straigt and move the slider  <span role="img">{isSettingStraight ? '😎' : '😪'}</span>
+      Sit straigt and move the slider  <span role="img">{isSettingStraight ? '😎' : '😪'}</span>
     </header>
     <Main
       cameraRef={cameraRef}
