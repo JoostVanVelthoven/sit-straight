@@ -1,5 +1,6 @@
 import fetchInject from "fetch-inject"
 import React, { useEffect, useRef, useState } from "react"
+import { Helmet } from "react-helmet"
 import Footer from "../components/footerComponent"
 import Main from "../components/mainComponent"
 import canvasCameraDrawer from "../helpers/canvasCameraDrawer"
