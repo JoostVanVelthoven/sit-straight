@@ -17,7 +17,7 @@
     "fetch-inject": "^2.0.4",
     "gatsby": "^2.26.0",
     "gatsby-plugin-manifest": "^2.6.0",
-    "gatsby-plugin-offline": "^3.0.34",
+    "gatsby-plugin-offline": "^3.10.1",
 
     "gatsby-plugin-react-helmet": "^3.4.0",
     "react": "^16.14.0",    
