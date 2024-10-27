@@ -1,10 +1,12 @@
-import React, { useCallback } from "react"
+import React, { useCallback, useState } from "react"
 
 import Slider from 'react-input-slider';
 import { useObservable } from "rxjs-hooks";
 import { percentageCorrect$, timeCorrect$ } from '../helpers/timer';
 
 export default ({ sliderState, setSliderState, cameraRef, canvasRef, setupState, setSetupState }) => {
+
+    const [isPipEnabled, setIsPipEnabled] = useState(false);
 
     const usePip = useCallback(
         () => {
@@ -15,6 +17,20 @@ export default ({ sliderState, setSliderState, cameraRef, canvasRef, setupState,
             }
         },
         [cameraRef.current, cameraRef, cameraRef.current, setupState, setSetupState],
+    );
+
+    const togglePip = useCallback(
+        async () => {
+            if (isPipEnabled) {
+                if (document.pictureInPictureElement) {
+                    await document.exitPictureInPicture();
+                }
+            } else {
+                await cameraRef.current.requestPictureInPicture();
+            }
+            setIsPipEnabled(!isPipEnabled);
+        },
+        [isPipEnabled, cameraRef]
     );
 
     const chanedSliderState = useCallback(
@@ -42,6 +58,9 @@ export default ({ sliderState, setSliderState, cameraRef, canvasRef, setupState,
             <div><span className="bulb">{setupState.isSliderUsed ? '✓' : 2}</span> Adjust slider</div>
             {cameraRef.current && cameraRef.current.requestPictureInPicture &&
                 <div onClick={usePip} onKeyDown={usePip} role="link" className="click"><span className="bulb">{setupState.hasPip ? '✓' : 3}</span> PIP for non active browser checking</div>}
+            <button onClick={togglePip}>
+                {isPipEnabled ? "Disable PiP" : "Enable PiP"}
+            </button>
         </div>
         <div className="stats">
             <div>{timeCorrect}</div>
@@ -51,4 +70,3 @@ export default ({ sliderState, setSliderState, cameraRef, canvasRef, setupState,
 
     </main>);
 }
-

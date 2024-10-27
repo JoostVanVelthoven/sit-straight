@@ -17,6 +17,7 @@ export default () => {
   const [headPosition, setHeadPosition] = useState()
   const [isSettingStraight, setIsSettingStraight] = useState(undefined)
   const [setupState, setSetupState] = useState({ hasCamera: false })
+  const [isPipEnabled, setIsPipEnabled] = useState(false)
 
   //unfortunately  the webcam current library is not node/npm.
   useEffect(() => {
@@ -62,6 +63,21 @@ export default () => {
         " - fix your back posture using camera coaching"
     }
   }, [isSettingStraight])
+
+  useEffect(() => {
+    const handleVisibilityChange = async () => {
+      if (document.visibilityState === "hidden" && isPipEnabled) {
+        await cameraRef.current.requestPictureInPicture()
+      }
+    }
+
+    document.addEventListener("visibilitychange", handleVisibilityChange)
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange)
+    }
+  }, [isPipEnabled])
+
   const title = "fix your back posture using camera coaching"
   const description =
     "Do you have problems with your posture? This website helps you with the camera and machine learning to sit straight."
@@ -102,6 +118,8 @@ export default () => {
         setSliderState={setSliderState}
         setupState={setupState}
         setSetupState={setSetupState}
+        isPipEnabled={isPipEnabled}
+        setIsPipEnabled={setIsPipEnabled}
       />
       <Footer />
     </>
