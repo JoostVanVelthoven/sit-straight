@@ -62,6 +62,21 @@ export default () => {
         " - fix your back posture using camera coaching"
     }
   }, [isSettingStraight])
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden" && cameraRef.current) {
+        cameraRef.current.requestPictureInPicture()
+      }
+    }
+
+    document.addEventListener("visibilitychange", handleVisibilityChange)
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange)
+    }
+  }, [cameraRef])
+
   const title = "fix your back posture using camera coaching"
   const description =
     "Do you have problems with your posture? This website helps you with the camera and machine learning to sit straight."
